@@ -21,3 +21,7 @@ func NewMongoUserStore(client *mongo.Client, coll *mongo.Collection) *MongoUserS
 		coll:   coll,
 	}
 }
+
+func (m *MongoUserStore) CreateUser(ctx context.Context) error {
+	return nil
+}
