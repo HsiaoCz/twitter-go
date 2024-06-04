@@ -3,11 +3,12 @@ package db
 import (
 	"context"
 
+	"github.com/HsiaoCz/twitter-go/types"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type UserStorer interface {
-	CreateUser(context.Context) error
+	CreateUser(context.Context, *types.CreateUserParams) (*types.User, error)
 }
 
 type MongoUserStore struct {
@@ -22,6 +23,6 @@ func NewMongoUserStore(client *mongo.Client, coll *mongo.Collection) *MongoUserS
 	}
 }
 
-func (m *MongoUserStore) CreateUser(ctx context.Context) error {
-	return nil
+func (m *MongoUserStore) CreateUser(ctx context.Context, params *types.CreateUserParams) (*types.User, error) {
+	return nil,nil
 }
