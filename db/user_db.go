@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/HsiaoCz/twitter-go/types"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -24,5 +25,9 @@ func NewMongoUserStore(client *mongo.Client, coll *mongo.Collection) *MongoUserS
 }
 
 func (m *MongoUserStore) CreateUser(ctx context.Context, params *types.CreateUserParams) (*types.User, error) {
-	return nil,nil
+	return nil, nil
+}
+
+func (m *MongoUserStore) GetUserByID(ctx context.Context, user_id primitive.ObjectID) (*types.User, error) {
+	return nil, nil
 }

@@ -1,7 +1,10 @@
 package types
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -35,6 +38,7 @@ const (
 	minFirstName = 4
 	minLastName  = 4
 	minPassword  = 8
+	minNickName  = 4
 )
 
 func (params CreateUserParams) Validate() map[string]string {
@@ -48,5 +52,14 @@ func (params CreateUserParams) Validate() map[string]string {
 	if len(params.Password) < minPassword {
 		errors["password"] = fmt.Sprintf("the password shoulden't short then %d", minPassword)
 	}
+	if len(params.NickName) < minNickName {
+		errors["nickName"] = fmt.Sprintf("the nickName shoulden't short the %d", minNickName)
+	}
 	return errors
+}
+
+func EncryptedPassword(oldPassword string) string {
+	h := md5.New()
+	h.Write([]byte(os.Getenv("SECRET")))
+	return hex.EncodeToString(h.Sum([]byte(oldPassword)))
 }
